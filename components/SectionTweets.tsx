@@ -2,50 +2,49 @@
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import { Spinner } from "./ui/spinner";
+import timeAgo from "@/lib/timeAgo";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function SectionTweets() {
   const tweets = useQuery(api.tweets.getTweets);
   console.log("TWEETS", tweets)
 
-  if (!tweets) return <Spinner />;
+  if (!tweets) return <div className="p-10">
+    <Spinner />
+  </div>;
 
   // Check if it's an error object
   if (!Array.isArray(tweets)) {
     console.log("ERROR", tweets.error);
-    return <Spinner />;
+    return <div className="p-10">
+      <Spinner />
+    </div>;;
   }
 
   return (
-    <section className="flex flex-col gap-4 p-4 max-w-xl mx-auto">
+    <section className="flex flex-col max-w-xl mx-auto w-full border-r border-l border-foreground/20">
       {tweets.map((tweet) => (
         <div
           key={tweet._id}
-          className="flex items-start gap-3 p-4 border rounded-xl shadow-sm hover:bg-gray-50 transition"
+          className="flex items-start w-full gap-3 p-4 hover:bg-foreground/5 transition border-b border-foreground/20"
         >
           {/* Profile Picture */}
-          <img
-            src={tweet.userPicture}
-            alt={tweet.userFullName}
-            className="w-12 h-12 rounded-full object-cover"
-          />
+          <Avatar className="size-12">
+            <AvatarImage src={tweet.userPicture} />
+            <AvatarFallback>K</AvatarFallback>
+          </Avatar>
 
           {/* Tweet Content */}
           <div className="flex-1">
-            {/* User info */}
+            {/* tweet info */}
             <div className="flex items-center gap-2">
               <span className="font-bold">{tweet.userFullName}</span>
-              <span className="text-gray-500">@{tweet.userName}</span>
+              <span className="opacity-70">@{tweet.userName}</span>
+              <span className="opacity-50">{timeAgo(tweet._creationTime)}</span>
             </div>
 
-            {/* Retweet info */}
-            {tweet.retweet && (
-              <div className="text-sm text-gray-400 mt-1">
-                Retweeted from <a className="underline">{tweet.retweet}</a>
-              </div>
-            )}
-
             {/* Tweet text */}
-            <p className="mt-1 text-gray-800">{tweet.text}</p>
+            <p className="mt-1 whitespace-pre-wrap">{tweet.text}</p>
 
             {/* Likes */}
             <div className="flex items-center gap-2 mt-2 text-gray-500 text-sm">

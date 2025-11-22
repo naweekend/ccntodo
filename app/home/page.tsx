@@ -12,7 +12,8 @@ export default async function Home() {
 
   return (
     <>
-      <main className="flex flex-col py-12 gap-5 justify-center items-center">
+      <main className="flex flex-col py-12 justify-center items-center">
+        <h1>K</h1>
         <SectionCreateTweet />
         <SectionTweets />
       </main>
