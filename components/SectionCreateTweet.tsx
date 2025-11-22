@@ -16,7 +16,7 @@ export default function SectionCreateTweet() {
   const { user } = useUser();
 
   return (
-    <section className="max-w-2xl flex flex-col gap-5 items-center w-full p-5 border-r border-l border-b border-foreground/20">
+    <section className="max-w-2xl flex flex-col gap-5 items-center w-full p-5 border-b border-foreground/20">
       <div className="flex sm:gap-2 gap-1 w-full">
         <Avatar className="sm:size-12 size-10">
           <AvatarImage src={user?.imageUrl} />
@@ -28,7 +28,7 @@ export default function SectionCreateTweet() {
       <div className="flex justify-between items-center gap-5 w-full">
         <p className="text-destructive">{tweetText.length}/280</p>
 
-        <Button className="w-fit rounded-full px-6" onClick={() => {
+        <Button className="w-fit rounded-full px-6 active:scale-95 transition-all duration-250 cursor-pointer" onClick={() => {
           if (tweetText.length < 1) {
             toast.error("Post cannot be empty");
             return;

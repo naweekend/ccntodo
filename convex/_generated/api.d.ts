@@ -9,6 +9,7 @@
  */
 
 import type * as tweets from "../tweets.js";
+import type * as user from "../user.js";
 
 import type {
   ApiFromModules,
@@ -18,6 +19,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   tweets: typeof tweets;
+  user: typeof user;
 }>;
 
 /**

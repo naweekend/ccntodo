@@ -1,18 +1,14 @@
 import type { Metadata } from 'next'
-import { DM_Sans, Geist_Mono } from 'next/font/google'
+import { DM_Sans } from 'next/font/google'
 import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import ConvexClientProvider from '@/components/ConvexClientProvider'
 import { Toaster } from 'sonner'
 import { shadcn } from '@clerk/themes'
+import Navbar from '@/components/Navbar'
+import RightSide from '@/components/RightSide'
 
-const geistSans = DM_Sans({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const sansFont = DM_Sans({
   subsets: ['latin'],
 })
 
@@ -28,10 +24,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
+      <body className={`${sansFont.className} antialiased dark`}>
         <Toaster />
         <ClerkProvider appearance={{ theme: shadcn }}>
-          <ConvexClientProvider>{children}</ConvexClientProvider>
+          <ConvexClientProvider>
+            <main className="flex flex-col justify-center items-center">
+              <Navbar />
+
+              <div className="mt-17 w-full flex justify-center items-start gap-4 h-[calc(100vh-64px)]">
+                {/* Left side */}
+                <RightSide className="max-md:hidden flex-[1_1_0] min-w-[200px] sticky top-17 self-start" />
+
+                {/* Center */}
+                <div className="flex flex-col justify-start items-center grow max-w-2xl w-full overflow-y-scroll scrollbar-none border-r border-l border-foreground/20 min-h-screen">
+                  {children}
+                </div>
+
+                {/* Right side */}
+                <RightSide className="max-md:hidden flex-[1_1_0] min-w-[200px] sticky top-17 self-start" />
+              </div>
+            </main>
+          </ConvexClientProvider>
         </ClerkProvider>
       </body>
     </html>
