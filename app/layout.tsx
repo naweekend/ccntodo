@@ -53,7 +53,7 @@ export default function RootLayout({
                 </div>
 
                 {/* Right side */}
-                <RightSide className="max-lg:hidden flex-[1_1_0] min-w-[200px] sticky top-17 self-start" />
+                <RightSide className="max-lg:hidden flex-[1_1_0] min-w-[200px] sticky self-start" />
                 {/* <LeftSidebar className="max-md:hidden flex-[1_1_0] min-w-[200px] sticky  self-start" /> */}
 
               </div>
