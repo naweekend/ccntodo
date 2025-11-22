@@ -41,7 +41,7 @@ export default function RootLayout({
             <main className="flex flex-col justify-center items-center">
               <Navbar />
 
-              <div className="mt-17 w-full flex justify-center items-start h-[calc(100vh-64px)] overflow-y-hidden">
+              <div className="mt-17 w-full flex justify-center items-start h-[calc(100vh-68px)] overflow-y-hidden">
                 {/* Left side */}
                 <LeftSidebar className="max-md:hidden flex-[1_1_0] min-w-[200px] sticky  self-start" />
 
@@ -53,7 +53,9 @@ export default function RootLayout({
                 </div>
 
                 {/* Right side */}
-                <RightSide className="max-md:hidden flex-[1_1_0] min-w-[200px] sticky top-17 self-start" />
+                <RightSide className="max-lg:hidden flex-[1_1_0] min-w-[200px] sticky top-17 self-start" />
+                {/* <LeftSidebar className="max-md:hidden flex-[1_1_0] min-w-[200px] sticky  self-start" /> */}
+
               </div>
             </main>
 

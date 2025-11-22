@@ -16,7 +16,7 @@ export default function UserDetails({ userId, userImage, userName, userFullname,
   const followers = useQuery(api.user.getFollowers, { userId: userId });
   const { user: currentUser } = useUser();
 
-  if (!followers || !currentUser) return <div className="p-10">
+  if (!followers || !currentUser) return <div className="p-10 flex justify-center items-center">
     <Spinner />
   </div>;
 

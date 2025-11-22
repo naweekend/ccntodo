@@ -12,14 +12,14 @@ export default function SectionTweets() {
   const tweets = useQuery(api.tweets.getTweets);
   console.log(tweets);
 
-  if (!tweets) return <div className="p-10">
+  if (!tweets) return <div className="p-10 flex justify-center items-center">
     <Spinner />
   </div>;
 
   // Check if it's an error object
   if (!Array.isArray(tweets)) {
     console.log("ERROR", tweets.error);
-    return <div className="p-10">
+    return <div className="p-10 flex justify-center items-center">
       <Spinner />
     </div>;;
   }
