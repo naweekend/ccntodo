@@ -21,7 +21,7 @@ export default function ButtonFollow({ userId }) {
 
   let currentFollower = null;
   if (Array.isArray(followers)) {
-    currentFollower = followers?.find((follower) => follower._id === currentUser.id);
+    currentFollower = followers?.find((follower) => follower.userId === currentUser.id);
   }
 
   return (
