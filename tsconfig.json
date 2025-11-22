@@ -36,7 +36,11 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "components/TweetControls.jsx",
-    "components/ButtonFollow.jsx"
+    "components/ButtonFollow.jsx",
+    "components/NProgressWrapper.jsx",
+    "components/NProgressWrapper.jsx",
+    "components/NProgressWrapper.jsx",
+    "components/NProgressWrapper.jsx"
   ],
   "exclude": [
     "node_modules"

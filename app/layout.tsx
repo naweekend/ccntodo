@@ -7,6 +7,7 @@ import { Toaster } from 'sonner'
 import { shadcn } from '@clerk/themes'
 import Navbar from '@/components/Navbar'
 import RightSide from '@/components/RightSide'
+import NextTopLoader from 'nextjs-toploader';
 
 const sansFont = DM_Sans({
   subsets: ['latin'],
@@ -26,6 +27,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${sansFont.className} antialiased dark`}>
         <Toaster />
+        <NextTopLoader
+          color="white"
+          height={3}
+          showSpinner={false}
+        />
         <ClerkProvider appearance={{ theme: shadcn }}>
           <ConvexClientProvider>
             <main className="flex flex-col justify-center items-center">
