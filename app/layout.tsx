@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { DM_Sans } from 'next/font/google'
+import { Rubik } from 'next/font/google'
 import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import ConvexClientProvider from '@/components/ConvexClientProvider'
@@ -8,8 +8,10 @@ import { shadcn } from '@clerk/themes'
 import Navbar from '@/components/Navbar'
 import RightSide from '@/components/RightSide'
 import NextTopLoader from 'nextjs-toploader';
+import Dock from '@/components/Dock'
+import ScrollWrapper from '@/components/ScrollWrapper'
 
-const sansFont = DM_Sans({
+const sansFont = Rubik({
   subsets: ['latin'],
 })
 
@@ -28,7 +30,7 @@ export default function RootLayout({
       <body className={`${sansFont.className} antialiased dark`}>
         <Toaster />
         <NextTopLoader
-          color="white"
+          color="var(--primary)"
           height={3}
           showSpinner={false}
         />
@@ -43,13 +45,17 @@ export default function RootLayout({
 
                 {/* Center */}
                 <div className="flex flex-col justify-start items-center grow max-w-2xl w-full overflow-y-scroll scrollbar-none border-r border-l border-foreground/20 min-h-screen">
-                  {children}
+                  <ScrollWrapper>
+                    {children}
+                  </ScrollWrapper>
                 </div>
 
                 {/* Right side */}
                 <RightSide className="max-md:hidden flex-[1_1_0] min-w-[200px] sticky top-17 self-start" />
               </div>
             </main>
+
+            <Dock />
           </ConvexClientProvider>
         </ClerkProvider>
       </body>

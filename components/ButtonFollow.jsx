@@ -1,7 +1,7 @@
 "use client"
 
 import { api } from "@/convex/_generated/api";
-import { useUser } from "@clerk/nextjs";
+import { useClerk, UserButton, useUser } from "@clerk/nextjs";
 import { useMutation, useQuery } from "convex/react";
 import { Spinner } from "./ui/spinner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -9,6 +9,7 @@ import MatrixRain from "@/components/MatrixRain";
 import { formatUTCFromMS } from "@/lib/timeAgo";
 
 export default function UserDetails({ userId, userImage, userName, userFullname, userCreatedAt }) {
+  const { openUserProfile } = useClerk();
   const addFollower = useMutation(api.user.addFollower);
   const removeFollower = useMutation(api.user.removeFollower);
 
@@ -31,6 +32,7 @@ export default function UserDetails({ userId, userImage, userName, userFullname,
 
   const canAppear = userId !== currentUser.id;
 
+
   return (
     <section className="w-full border-b border-foreground/20">
       <div className="w-full flex flex-col justify-between items-center gap-2">
@@ -45,17 +47,23 @@ export default function UserDetails({ userId, userImage, userName, userFullname,
               <AvatarFallback>K</AvatarFallback>
             </Avatar>
 
-            {canAppear && (
+            {canAppear ? (
               !isFollowing ? (
                 <button onClick={() => {
                   addFollower({ followerId: currentUser.id, userId: userId })
-                }} className="py-2 hover:opacity-90 cursor-pointer transition-all duration-250 active:scale-95 px-6 bg-foreground text-background rounded-full">Follow</button>
+                }} className="py-2 hover:opacity-90 cursor-pointer transition-all duration-250 active:scale-95 px-6 bg-primary text-primary-foreground rounded-full">Follow</button>
               )
                 : (
                   <button onClick={() => {
                     removeFollower({ followerId: currentFollower?._id })
                   }} className="py-2 hover:opacity-90 cursor-pointer transition-all duration-250 active:scale-95 px-6 bg-foreground text-background rounded-full">Unfollow</button>
                 )
+            ) : (
+              <>
+                <button onClick={() => {
+                  openUserProfile()
+                }} className="py-2 hover:opacity-90 cursor-pointer transition-all duration-250 active:scale-95 px-6 text-foreground border border-foreground/30 rounded-full">Edit Profile</button>
+              </>
             )}
           </div>
 

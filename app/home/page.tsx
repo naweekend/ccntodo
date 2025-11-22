@@ -1,5 +1,3 @@
-import Navbar from "@/components/Navbar";
-import RightSide from "@/components/RightSide";
 import SectionCreateTweet from "@/components/SectionCreateTweet";
 import SectionTweets from "@/components/SectionTweets";
 import { auth } from "@clerk/nextjs/server";
