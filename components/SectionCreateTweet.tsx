@@ -16,7 +16,7 @@ export default function SectionCreateTweet() {
   const { user } = useUser();
 
   return (
-    <section className="max-w-2xl flex flex-col gap-5 items-center w-full p-5 border-b border-foreground/20" id="create-post">
+    <section className="sm:max-w-3xl flex flex-col gap-5 items-center w-full p-5" id="create-post">
       <div className="flex sm:gap-2 gap-1 w-full">
         <Avatar className="sm:size-12 size-10">
           <AvatarImage src={user?.imageUrl} />

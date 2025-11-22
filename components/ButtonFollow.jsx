@@ -36,7 +36,7 @@ export default function UserDetails({ userId, userImage, userName, userFullname,
   return (
     <section className="w-full border-b border-foreground/20">
       <div className="w-full flex flex-col justify-between items-center gap-2">
-        <div className="w-full h-30">
+        <div className="w-full h-40">
           <MatrixRain />
         </div>
 

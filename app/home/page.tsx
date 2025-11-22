@@ -14,6 +14,8 @@ export default async function Home() {
     <>
       <SectionCreateTweet />
       <SectionTweets />
+      <footer className="flex justify-center items-center gap-5 w-full pt-[0.1px]">
+      </footer>
     </>
   )
 }

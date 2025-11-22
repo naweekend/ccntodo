@@ -8,8 +8,8 @@ export default function Dock() {
   const { user } = useUser();
 
   return (
-    <div className="p-5 fixed bottom-0 left-0 bg-background border-t border-r border-l border-foreground/20 z-99 h-17 w-full flex justify-center">
-      <div className="max-w-2xl w-full flex items-center justify-around gap-5 ">
+    <div className="p-5 sm:hidden fixed bottom-0 left-0 bg-background border-t border-r border-l border-foreground/20 z-99 h-17 w-full flex justify-center">
+      <div className="sm:max-w-3xl w-full flex items-center justify-around gap-5 ">
         <Link scroll={true} href="/home" className="active:scale-90 size-7 transition-all duration-250">
           <Home className="size-full" />
         </Link>

@@ -10,6 +10,8 @@ import RightSide from '@/components/RightSide'
 import NextTopLoader from 'nextjs-toploader';
 import Dock from '@/components/Dock'
 import ScrollWrapper from '@/components/ScrollWrapper'
+import { ScrollArea } from '@radix-ui/react-scroll-area'
+import LeftSidebar from '@/components/LeftSidebar'
 
 const sansFont = Rubik({
   subsets: ['latin'],
@@ -39,15 +41,15 @@ export default function RootLayout({
             <main className="flex flex-col justify-center items-center">
               <Navbar />
 
-              <div className="mt-17 w-full flex justify-center items-start gap-4 h-[calc(100vh-64px)]">
+              <div className="mt-17 w-full flex justify-center items-start h-[calc(100vh-64px)] overflow-y-hidden">
                 {/* Left side */}
-                <RightSide className="max-md:hidden flex-[1_1_0] min-w-[200px] sticky top-17 self-start" />
+                <LeftSidebar className="max-md:hidden flex-[1_1_0] min-w-[200px] sticky  self-start" />
 
                 {/* Center */}
                 <div className="flex flex-col justify-start items-center grow max-w-2xl w-full overflow-y-scroll scrollbar-none border-r border-l border-foreground/20 min-h-screen">
-                  <ScrollWrapper>
+                  <ScrollArea className='h-screen w-full'>
                     {children}
-                  </ScrollWrapper>
+                  </ScrollArea>
                 </div>
 
                 {/* Right side */}

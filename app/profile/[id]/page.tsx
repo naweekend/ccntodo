@@ -11,7 +11,7 @@ export default async function ProfilePage({ params }: { params: { id: string } }
   const user = await client.users.getUser(id);
   return (
     <>
-      <div className="p-4 border-b border-foreground/20 bg-card w-full flex justify-between items-center">
+      <div className="p-4 border-b border-foreground/20 bg-card/20 w-full flex justify-between items-center">
         <Link scroll={true} href="/home" className="flex items-center gap-1.5 rounded-md active:scale-90 transition-all duration-250">
           <ArrowLeft size={16} />
           Back

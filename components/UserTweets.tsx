@@ -25,7 +25,7 @@ export default function SectionTweets({ userId }: { userId: string }) {
   }
 
   return (
-    <section className="flex flex-col max-w-2xl mx-auto w-full scrollbar-none">
+    <section className="flex flex-col sm:max-w-3xl mx-auto w-full scrollbar-none">
       {tweets.map((tweet) => (
         <div
           key={tweet._id}

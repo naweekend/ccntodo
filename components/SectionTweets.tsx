@@ -25,11 +25,11 @@ export default function SectionTweets() {
   }
 
   return (
-    <section className="flex flex-col max-w-2xl mx-auto w-full scrollbar-none">
+    <section className="flex flex-col sm:max-w-3xl mx-auto w-full scrollbar-none mb-16.5">
       {tweets.map((tweet) => (
         <div
           key={tweet._id}
-          className="flex items-start w-full gap-3 p-4 hover:bg-foreground/5 transition border-b border-foreground/20"
+          className="flex items-start w-full gap-3 p-4 hover:bg-foreground/5 transition border-t border-foreground/20"
         >
           {/* Profile Picture */}
           <Link scroll={true} href={`/profile/${tweet.userId}`}>
