@@ -4,9 +4,10 @@ import React, { useEffect, useRef } from 'react';
 
 interface MatrixRainProps {
   className?: string;
+  color?: string; // Added color prop back for manual overrides
 }
 
-const MatrixRain = ({ className = '' }: MatrixRainProps) => {
+const MatrixRain = ({ className = '', color }: MatrixRainProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -20,7 +21,6 @@ const MatrixRain = ({ className = '' }: MatrixRainProps) => {
     if (!ctx) return;
 
     const fontSize = 16;
-    // Use a ref or variable to track animation state
     let columns = 0;
     let drops: number[] = [];
 
@@ -36,24 +36,20 @@ const MatrixRain = ({ className = '' }: MatrixRainProps) => {
       // Scale drawing context so we can still work with CSS pixel units
       ctx.scale(dpr, dpr);
 
-      // Recalculate columns based on new width
       columns = Math.floor(width / fontSize);
 
       // 2. Fix "Concentrated at start": Initialize drops scattered across the whole screen
       const rows = Math.floor(height / fontSize);
       drops = [];
       for (let x = 0; x < columns; x++) {
-        // Start at a random row instead of 0 to fill screen immediately
         drops[x] = Math.floor(Math.random() * rows);
       }
 
       return { width, height };
     };
 
-    // Initial setup
     let { width, height } = handleResize();
 
-    // Watch for container size changes
     const resizeObserver = new ResizeObserver(() => {
       const dims = handleResize();
       width = dims.width;
@@ -66,34 +62,32 @@ const MatrixRain = ({ className = '' }: MatrixRainProps) => {
     const nums = '0123456789';
     const alphabet = katakana + latin + nums;
 
-    // 3. Random Colors: Neon Palette
-    const getRandomColor = () => {
-      const colors = [
-        '#0F0',      // Green
-        '#00FF41',   // Matrix Green
-        '#008F11',   // Darker Green
-        '#00FFFF',   // Cyan
-        '#FF00FF',   // Magenta
-        '#FFFF00',   // Yellow
-        '#FFFFFF',   // White (Sparkle)
-      ];
-      return colors[Math.floor(Math.random() * colors.length)];
-    };
+    // 3. One Random Color Per Session
+    const neonColors = [
+      '#0F0',      // Green
+      '#00FF41',   // Matrix Green
+      '#008F11',   // Darker Green
+      '#00FFFF',   // Cyan
+      '#FF00FF',   // Magenta
+      '#FFFF00',   // Yellow
+      '#FFFFFF',   // White
+    ];
+
+    // If a specific color is passed via props, use it. 
+    // Otherwise, pick ONE random color when the component loads.
+    const rainColor = color || neonColors[Math.floor(Math.random() * neonColors.length)];
 
     const draw = () => {
       // Semi-transparent black for trail effect
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, width, height);
 
+      ctx.fillStyle = rainColor; // Use the single selected color
       ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
         const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
 
-        // Set a random color for every character drawn
-        ctx.fillStyle = getRandomColor();
-
-        // Render character
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
         // Reset drop to top randomly after it has crossed screen
@@ -111,7 +105,7 @@ const MatrixRain = ({ className = '' }: MatrixRainProps) => {
       clearInterval(interval);
       resizeObserver.disconnect();
     };
-  }, []);
+  }, [color]);
 
   return (
     <div

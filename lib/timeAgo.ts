@@ -20,3 +20,15 @@ export default function timeAgo(timestamp: number) {
     return `${years}yrs`;
   }
 }
+
+export function formatUTCFromMS(utcMs: number) {
+  const date = new Date(utcMs);
+
+  const day = date.getUTCDate();
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const month = monthNames[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
+
+  return `${day} ${month} ${year}`;
+}

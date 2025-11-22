@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import MatrixRain from "@/components/MatrixRain";
+import { Button } from "@/components/ui/button";
 
 export default async function ProfilePage({ params }: { params: { id: string } }) {
   const { id } = await params;
@@ -28,16 +29,19 @@ export default async function ProfilePage({ params }: { params: { id: string } }
             <MatrixRain />
           </div>
 
-          <div className="flex flex-col bg-red-500 w-full">
-            <Avatar className="size-30 -mt-6">
-              <AvatarImage src={user.imageUrl} />
-              <AvatarFallback>K</AvatarFallback>
-            </Avatar>
+          <div className="flex flex-col w-full px-5 pb-5">
+            <div className="flex w-full items-center justify-between">
+              <Avatar className="size-30 -mt-6">
+                <AvatarImage src={user.imageUrl} />
+                <AvatarFallback>K</AvatarFallback>
+              </Avatar>
 
-            <div className="flex flex-col text-right">
+              <button className="py-2 hover:opacity-90 cursor-pointer transition-all duration-250 active:scale-95 px-6 bg-foreground text-background rounded-full">Follow</button>
+            </div>
+
+            <div className="flex flex-col mt-5">
               <h1 className="text-2xl font-bold">{user.fullName}</h1>
               <h2 className="opacity-80">@{user.username}</h2>
-              <h3>Last Active: {user.lastActiveAt}</h3>
             </div>
           </div>
         </div>
