@@ -15,7 +15,9 @@ export default function UserDetails({ userId, userImage, userName, userFullname,
   const followers = useQuery(api.user.getFollowers, { userId: userId });
   const { user: currentUser } = useUser();
 
-  if (!followers || !currentUser) return <Spinner />;
+  if (!followers || !currentUser) return <div className="p-10">
+    <Spinner />
+  </div>;
 
   let isFollowing = false;
   if (Array.isArray(followers)) {
@@ -64,7 +66,7 @@ export default function UserDetails({ userId, userImage, userName, userFullname,
             </div>
             <div className="flex flex-col text-right">
               <p className="text-sm opacity-80">Joined {formatUTCFromMS(userCreatedAt)}</p>
-              <p>{followers.length == 1 ? `${followers.length} Follower` : `${followers.length} Followers`}</p>
+              <p>{followers.length == 1 ? `${followers.length ?? 0} Follower` : `${followers.length ?? 0} Followers`}</p>
             </div>
           </div>
         </div>

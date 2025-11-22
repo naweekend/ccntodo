@@ -101,3 +101,50 @@ export const removeLike = mutation({
     await ctx.db.delete(args.likeId);
   },
 })
+
+export const getTweetsForUser = query({
+  args: { userId: v.string() },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    console.log(identity)
+
+    if (!identity) {
+      console.warn("No identity!");
+      return { error: "UNAUTHORIZED" };
+    }
+
+    const tweetsWithoutLikes = await ctx.db
+      .query("tweets")
+      .withIndex("by_userid", (q) => q.eq("userId", args.userId))
+      .order("desc")
+      .collect()
+
+    const tweetIds = tweetsWithoutLikes.map((tweet) => tweet._id);
+
+    // each like for an id
+    const likesByTweet = {};
+
+    await Promise.all(tweetIds.map(async (tweetId) => {
+      const likes = await ctx.db
+        .query("likes")
+        .withIndex("by_tweetId", (q) => q.eq("tweetId", tweetId))
+        .collect();
+
+      // @ts-ignore
+      likesByTweet[tweetId.toString()] = likes;
+    }));
+
+    const tweets = tweetsWithoutLikes.map((tweet) => {
+      // @ts-ignore
+      const likes = likesByTweet[tweet._id.toString()];
+
+      return {
+        ...tweet,
+        likes: likes,
+      }
+    });
+
+    return tweets;
+  },
+})
