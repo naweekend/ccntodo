@@ -14,7 +14,7 @@ export const getTweets = query({
 
     const tweets = await ctx.db
       .query("tweets")
-      // .withIndex("by_userid", (q) => q.eq("userId", identity.subject))
+      .order("desc")
       .collect();
 
     return tweets;
@@ -26,8 +26,9 @@ export const createTweet = mutation({
 
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
+    console.log("IDENTITY", identity)
 
-    if (!identity) {
+    if (!identity || !identity.subject || !identity.name || !identity.nickname || !identity.pictureUrl) {
       console.warn("No identity!");
       return { error: "UNAUTHORIZED" };
     }
@@ -35,8 +36,12 @@ export const createTweet = mutation({
     if (args?.retweet) {
       await ctx.db.insert("tweets", {
         text: args.text,
-        userId: identity?.subject,
+        userId: identity.subject,
+        userFullName: identity.name,
+        userName: identity.nickname,
+        userPicture: identity.pictureUrl,
         likes: 0,
+        retweet: args.retweet,
       })
 
       return;
@@ -45,6 +50,9 @@ export const createTweet = mutation({
     await ctx.db.insert("tweets", {
       text: args.text,
       userId: identity?.subject,
+      userFullName: identity?.name,
+      userName: identity?.nickname,
+      userPicture: identity?.pictureUrl,
       likes: 0,
     })
 
