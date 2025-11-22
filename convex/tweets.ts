@@ -94,3 +94,10 @@ export const addLike = mutation({
     })
   },
 })
+
+export const removeLike = mutation({
+  args: { likeId: v.id("likes") },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.likeId);
+  },
+})
