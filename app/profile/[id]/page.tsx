@@ -3,19 +3,21 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import MatrixRain from "@/components/MatrixRain";
-import { Button } from "@/components/ui/button";
+import { formatUTCFromMS } from "@/lib/timeAgo";
+import ButtonFollow from "@/components/ButtonFollow";
 
 export default async function ProfilePage({ params }: { params: { id: string } }) {
   const { id } = await params;
 
   const client = await clerkClient();
   const user = await client.users.getUser(id);
+
   console.log("USER", user);
 
   return (
     <>
       <div className="p-4 border-b border-foreground/20 bg-card w-full flex justify-between items-center">
-        <Link href="/home" className="flex items-center gap-1 py-1 px-2 bg-background rounded-md">
+        <Link href="/home" className="flex items-center gap-1.5 rounded-md">
           <ArrowLeft size={16} />
           Back
         </Link>
@@ -36,12 +38,17 @@ export default async function ProfilePage({ params }: { params: { id: string } }
                 <AvatarFallback>K</AvatarFallback>
               </Avatar>
 
-              <button className="py-2 hover:opacity-90 cursor-pointer transition-all duration-250 active:scale-95 px-6 bg-foreground text-background rounded-full">Follow</button>
+              <ButtonFollow userId={user.id} />
             </div>
 
-            <div className="flex flex-col mt-5">
-              <h1 className="text-2xl font-bold">{user.fullName}</h1>
-              <h2 className="opacity-80">@{user.username}</h2>
+            <div className="flex justify-between items-baseline w-full">
+              <div className="flex flex-col mt-5">
+                <h1 className="text-2xl font-bold">{user.fullName}</h1>
+                <h2 className="opacity-80">@{user.username}</h2>
+              </div>
+              <div className="flex flex-col">
+                <p className="text-sm opacity-80">Joined {formatUTCFromMS(user.createdAt)}</p>
+              </div>
             </div>
           </div>
         </div>

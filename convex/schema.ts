@@ -24,5 +24,6 @@ export default defineSchema({
   followers: defineTable({
     followerId: v.string(),
     userId: v.string(),
-  }),
+  })
+    .index("by_userid", ["userId"]),
 })
