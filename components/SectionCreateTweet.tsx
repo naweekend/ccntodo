@@ -16,13 +16,13 @@ export default function SectionCreateTweet() {
   const { user } = useUser();
 
   return (
-    <section className="max-w-xl flex flex-col gap-5 items-center w-full p-5 border border-foreground/20">
-      <div className="flex gap-2 w-full">
-        <Avatar className="size-12">
+    <section className="max-w-2xl flex flex-col gap-5 items-center w-full p-5 border-r border-l border-b border-foreground/20">
+      <div className="flex sm:gap-2 gap-1 w-full">
+        <Avatar className="sm:size-12 size-10">
           <AvatarImage src={user?.imageUrl} />
           <AvatarFallback>K</AvatarFallback>
         </Avatar>
-        <Textarea maxLength={280} minLength={1} className="w-full border-0 focus:outline-0 focus:border-0 outline-0 text-lg!" value={tweetText} onChange={(e) => setTweetText(e.target.value)} placeholder="What's happening?" />
+        <Textarea maxLength={280} minLength={1} className="w-full border-0 focus:outline-0 focus:border-0 outline-0 sm:text-lg!" value={tweetText} onChange={(e) => setTweetText(e.target.value)} placeholder="What's happening?" />
       </div>
 
       <div className="flex justify-between items-center gap-5 w-full">
@@ -37,6 +37,7 @@ export default function SectionCreateTweet() {
             return;
           }
           createTweet({ text: tweetText })
+          setTweetText("");
         }} type="submit">Post</Button>
       </div>
     </section>

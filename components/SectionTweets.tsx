@@ -24,14 +24,14 @@ export default function SectionTweets() {
   }
 
   return (
-    <section className="flex flex-col max-w-xl mx-auto w-full border-r border-l border-foreground/20">
+    <section className="flex flex-col max-w-2xl mx-auto w-full scrollbar-none">
       {tweets.map((tweet) => (
         <div
           key={tweet._id}
           className="flex items-start w-full gap-3 p-4 hover:bg-foreground/5 transition border-b border-foreground/20"
         >
           {/* Profile Picture */}
-          <Avatar className="size-12">
+          <Avatar className="sm:size-12 size-10">
             <AvatarImage src={tweet.userPicture} />
             <AvatarFallback>K</AvatarFallback>
           </Avatar>
@@ -39,16 +39,20 @@ export default function SectionTweets() {
           {/* Tweet Content */}
           <div className="flex-1">
             {/* tweet info */}
-            <div className="flex items-center gap-2">
-              <span className="font-bold">{tweet.userFullName}</span>
-              <span className="opacity-70">@{tweet.userName}</span>
+            <div className="flex items-center gap-2 max-sm:justify-between">
+              <div className="flex sm:flex-row flex-col sm:gap-2">
+                <span className="font-bold max-sm:text-sm">{tweet.userFullName}</span>
+                <span className="opacity-70 max-sm:text-sm">@{tweet.userName}</span>
+              </div>
               <span className="opacity-50">{timeAgo(tweet._creationTime)}</span>
             </div>
 
             {/* Tweet text */}
-            <p className="mt-1 whitespace-pre-wrap">{tweet.text}</p>
+            <p className="sm:mt-1 mt-2 whitespace-pre-wrap text-lg">{tweet.text}</p>
 
-            <TweetControls tweet={tweet} />
+            <div className="mt-3">
+              <TweetControls tweet={tweet} />
+            </div>
           </div>
         </div>
       ))}

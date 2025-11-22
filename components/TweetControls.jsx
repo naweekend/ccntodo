@@ -16,7 +16,7 @@ export default function TweetControls({ tweet }) {
   const userLike = tweet.likes.find(like => like.userId === user.id);
 
   return (
-    <div className="mt-5">
+    <div>
       {!userLike ? (
         <button
           onClick={() => addLike({ tweetId: tweet._id, userId: user.id })}

@@ -4,6 +4,7 @@ import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import ConvexClientProvider from '@/components/ConvexClientProvider'
 import { Toaster } from 'sonner'
+import { shadcn } from '@clerk/themes'
 
 const geistSans = DM_Sans({
   variable: '--font-geist-sans',
@@ -29,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
         <Toaster />
-        <ClerkProvider>
+        <ClerkProvider appearance={{ theme: shadcn }}>
           <ConvexClientProvider>{children}</ConvexClientProvider>
         </ClerkProvider>
       </body>
