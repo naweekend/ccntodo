@@ -4,7 +4,6 @@ import { v } from "convex/values";
 export default defineSchema({
   tweets: defineTable({
     text: v.string(),
-    likes: v.number(),
     // if u retweeting, this field is the og tweet's link
     retweet: v.optional(v.string()),
     userId: v.string(),
@@ -13,4 +12,9 @@ export default defineSchema({
     userPicture: v.string(),
   })
     .index("by_userid", ["userId"]),
+  likes: defineTable({
+    tweetId: v.id("tweets"),
+    userId: v.string(),
+  })
+    .index("by_tweetId", ["tweetId"])
 })

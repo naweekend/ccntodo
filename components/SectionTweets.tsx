@@ -1,13 +1,15 @@
 "use client";
+
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import { Spinner } from "./ui/spinner";
 import timeAgo from "@/lib/timeAgo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import TweetControls from "./TweetControls";
 
 export default function SectionTweets() {
   const tweets = useQuery(api.tweets.getTweets);
-  console.log("TWEETS", tweets)
+  console.log(tweets);
 
   if (!tweets) return <div className="p-10">
     <Spinner />
@@ -46,18 +48,7 @@ export default function SectionTweets() {
             {/* Tweet text */}
             <p className="mt-1 whitespace-pre-wrap">{tweet.text}</p>
 
-            {/* Likes */}
-            <div className="flex items-center gap-2 mt-2 text-gray-500 text-sm">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-red-500"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-              </svg>
-              <span>{tweet.likes}</span>
-            </div>
+            <TweetControls tweet={tweet} />
           </div>
         </div>
       ))}

@@ -1,0 +1,37 @@
+"use client";
+
+import { api } from "@/convex/_generated/api";
+import { useUser } from "@clerk/nextjs";
+import { useMutation } from "convex/react";
+import { Heart } from "lucide-react";
+
+export default function TweetControls({ tweet }) {
+  const { user } = useUser();
+  const addLike = useMutation(api.tweets.addLike);
+
+  if (!user) return null;
+
+  let likesContainsUser = false;
+
+  if (tweet.likes) {
+    likesContainsUser = tweet.likes.some((like) => like.userId === user.id);
+  }
+
+  return (
+    <div className="mt-5">
+      {!likesContainsUser ? (
+        <button onClick={() => {
+          addLike({ tweetId: tweet._id, userId: user.id })
+        }} className="flex gap-1 justify-center items-center">
+          <Heart fill="transparent" stroke="white" size={18} /> <span>{tweet.likes.length}</span>
+        </button>
+      ) : (
+        <button onClick={() => {
+          addLike({ tweetId: tweet._id, userId: user.id })
+        }} className="flex gap-1 justify-center items-center">
+          <Heart fill="red" stroke="red" size={18} /> <span>{tweet.likes.length}</span>
+        </button>
+      )}
+    </div>
+  )
+}
