@@ -64,18 +64,21 @@ export const getIQForUser = query({
 export const createIQ = mutation({
   args: { userId: v.string(), iq: v.number() },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
+    const existingIQ = await ctx.db
+      .query("iqs")
+      .withIndex("by_userid", (q) => q.eq("userId", args.userId))
+      .first()
 
-    if (!identity) {
-      console.warn("No identity!");
-      return { error: "UNAUTHORIZED" };
+    if (existingIQ) {
+      await ctx.db.patch(existingIQ._id, {
+        userId: args.userId,
+        iq: args.iq,
+      })
     }
 
     await ctx.db.insert("iqs", {
       userId: args.userId,
       iq: args.iq,
     })
-
-    return;
   },
 })

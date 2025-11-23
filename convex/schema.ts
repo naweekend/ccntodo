@@ -18,10 +18,6 @@ export default defineSchema({
     userId: v.string(),
   })
     .index("by_tweetId", ["tweetId"]),
-  follows: defineTable({
-    followeeId: v.string(),
-    userId: v.string(),
-  }),
   followers: defineTable({
     followerId: v.string(),
     userId: v.string(),
