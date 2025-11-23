@@ -13,7 +13,7 @@ export default async function ProfilePage({ params }: { params: { id: string } }
     <>
       <div className="p-4 border-b border-foreground/20 bg-card/20 w-full flex justify-between items-center">
         <Link scroll={true} href="/home" className="flex items-center gap-1.5 rounded-md active:scale-90 transition-all duration-250">
-          <ArrowLeft size={16} />
+          <ArrowLeft size={16} className="opacity-80" />
           Back
         </Link>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { Home, Plus, User } from "lucide-react";
+import { Brain, Home, Plus, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -11,13 +11,17 @@ export default function LeftSidebar({ className = "" }: { className?: string }) 
 
   const isActive = (path: string) => {
     if (path === "/home") return pathname === "/home" || pathname === "/";
-    if (!user?.id) return false;
-    return pathname?.startsWith(`/profile/${user.id}`);
+    if (path.startsWith("/profile") && user?.id) {
+      return pathname?.startsWith(`/profile/${user.id}`);
+    }
+    // For everything else, just match exact path
+    return pathname === path;
   };
 
   const navItems = [
     { href: "/home", icon: Home, label: "Home" },
     { href: `/profile/${user?.id}`, icon: User, label: "Profile" },
+    { href: "/iq", icon: Brain, label: "IQ Test" },
   ];
 
   return (

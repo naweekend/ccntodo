@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { Home, PlusCircle, User } from "lucide-react";
+import { Brain, Home, PlusCircle, User } from "lucide-react";
 import Link from "next/link";
 
 export default function Dock() {
@@ -15,11 +15,15 @@ export default function Dock() {
         </Link>
 
         <Link scroll={true} href="/home?focus=true" className="active:scale-90 size-7 transition-all duration-250">
-          <PlusCircle className="size-full" stroke="var(--primary)" />
+          <PlusCircle className="size-full" />
         </Link>
 
         <Link scroll={true} href={`/profile/${user?.id}`} className="active:scale-90 size-7 transition-all duration-250">
           <User className="size-full" />
+        </Link>
+
+        <Link scroll={true} href={`/iq`} className="active:scale-90 size-7 transition-all duration-250">
+          <Brain className="size-full" stroke="var(--primary)" />
         </Link>
       </div>
     </div>

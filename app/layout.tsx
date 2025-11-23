@@ -7,6 +7,7 @@ import { shadcn } from "@clerk/themes";
 import ConvexClientProvider from "@/components/ConvexClientProvider";
 import { Metadata } from "next";
 import Navbar from '@/components/Navbar';
+import Dock from '@/components/Dock';
 
 const sansFont = Rubik({
   subsets: ['latin'],
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ConvexClientProvider>
             <Navbar />
             {children}
+            <Dock />
           </ConvexClientProvider>
         </ClerkProvider>
       </body>
