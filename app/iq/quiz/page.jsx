@@ -59,7 +59,7 @@ export default function QuizPage() {
     <div className="py-20 px-5 mt-17 flex flex-col justify-center items-center">
       <h1 className="text-3xl font-bold">Question {q + 1}</h1>
       <div className="flex sm:flex-row flex-col justify-center items-center gap-5">
-        <TalkingEinstein stopAt={1000} className="lg:w-70 md:w-50 sm:w-30 w-1/2 mt-5" />
+        <TalkingEinstein stopAt={1000} className="lg:w-70 md:w-50 sm:w-30 w-1/2 mt-5  max-sm:hidden" />
         <div className="flex flex-col">
           <SpeechBubble
             className="max-w-md w-full sm:text-xl text-lg min-w-80 mt-5"
