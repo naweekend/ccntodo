@@ -5,6 +5,9 @@ export default function IQLayout({ children }: { children: React.ReactNode }) {
     <>
       <Suspense>
         {children}
+        <footer className="py-10">
+          <p className="opacity-0">yo</p>
+        </footer>
       </Suspense>
     </>
   );
