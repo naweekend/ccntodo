@@ -70,6 +70,7 @@ export const createIQ = mutation({
         userId: args.userId,
         iq: args.iq,
       })
+      return;
     }
 
     await ctx.db.insert("iqs", {

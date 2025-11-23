@@ -53,7 +53,7 @@ export default function SectionTweets() {
 
                 <Tooltip>
                   <TooltipTrigger>
-                    <Link href="/iq" className="bg-primary text-primary-foreground flex items-center gap-1 w-fit px-2 rounded-md"><Brain size={16} /> {tweet.iq}</Link>
+                    <Link href="/iq" className="bg-primary text-primary-foreground flex items-center gap-1 w-fit px-2 rounded-md"><Brain size={16} /> {tweet.iq === 300 ? "∞" : tweet.iq}</Link>
                   </TooltipTrigger>
                   <TooltipContent>
                     @{tweet.userName} has {tweet.iq} IQ
