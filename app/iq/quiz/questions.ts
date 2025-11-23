@@ -193,7 +193,7 @@ export const questions = [
     options: [
       { text: "Andes", iqValue: 0 },
       { text: "Himalayas", iqValue: 10 },
-      { text: "Rockies", iqValue: 0 },
+      { text: "Kirthar", iqValue: 0 },
     ],
   },
 
@@ -207,7 +207,7 @@ export const questions = [
     ],
   },
   {
-    text: "If a project group has 5 members and only 2 work, fraction active?",
+    text: "If a project group has 10 members and only 4 of them are working, fraction active?",
     options: [
       { text: "3/5", iqValue: 0 },
       { text: "1/5", iqValue: 0 },
