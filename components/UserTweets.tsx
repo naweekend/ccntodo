@@ -29,7 +29,7 @@ export default function SectionTweets({ userId }: { userId: string }) {
       {tweets.map((tweet) => (
         <div
           key={tweet._id}
-          className="flex items-start w-full gap-3 p-4 hover:bg-foreground/5 transition border-b border-foreground/20"
+          className="flex items-start w-full gap-3 p-4 hover:bg-foreground/5 transition border-t border-foreground/20"
         >
           {/* Profile Picture */}
           <Link scroll={true} href={`/profile/${tweet.userId}`}>

@@ -21,6 +21,10 @@ export default async function ProfilePage({ params }: { params: { id: string } }
       <UserDetails userId={user.id} userImage={user.imageUrl} userName={user.username} userFullname={user.fullName} userCreatedAt={user.createdAt} />
 
       <UserTweets userId={user.id} />
+
+      <footer className="flex justify-center items-center gap-5 w-full pt-50 max-sm:pt-17">
+        <span className="opacity-0">yo</span>
+      </footer>
     </>
   )
 }
