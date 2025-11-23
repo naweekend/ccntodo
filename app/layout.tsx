@@ -1,4 +1,4 @@
-import { Rubik } from 'next/font/google'
+import { Rubik, PT_Mono } from 'next/font/google'
 import "./globals.css";
 import { Toaster } from "sonner";
 import NextTopLoader from "nextjs-toploader";
@@ -6,9 +6,16 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { shadcn } from "@clerk/themes";
 import ConvexClientProvider from "@/components/ConvexClientProvider";
 import { Metadata } from "next";
+import Navbar from '@/components/Navbar';
 
 const sansFont = Rubik({
   subsets: ['latin'],
+})
+
+const monoFont = PT_Mono({
+  subsets: ['latin'],
+  variable: '--font-pt-mono',
+  weight: ['400'],
 })
 
 export const metadata: Metadata = {
@@ -20,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${sansFont.className} dark antialiased`}
+        className={`${sansFont.className} ${monoFont.variable} dark antialiased`}
       >
         <Toaster />
         <NextTopLoader
@@ -30,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <ClerkProvider appearance={{ theme: shadcn }}>
           <ConvexClientProvider>
+            <Navbar />
             {children}
           </ConvexClientProvider>
         </ClerkProvider>

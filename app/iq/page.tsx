@@ -1,3 +1,4 @@
+import Quiz from "@/components/Quiz";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -9,8 +10,8 @@ export default async function IQPage() {
   }
 
   return (
-    <div className="py-20 px-5 flex justify-center items-center">
-      <h1 className="text-5xl font-bold">The Real IQ Test</h1>
+    <div className="py-20 px-5 mt-17 flex flex-col justify-center items-center">
+      <Quiz />
     </div>
   )
 }

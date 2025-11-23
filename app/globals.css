@@ -231,3 +231,7 @@ html {
   display: none;
   /* Chrome, Safari, Opera */
 }
+
+#speech-bubble {
+  font-family: var(--font-pt-mono), monospace !important;
+}
