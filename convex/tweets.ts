@@ -5,8 +5,6 @@ export const getTweets = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
 
-    console.log(identity)
-
     if (!identity) {
       console.warn("No identity!");
       return { error: "UNAUTHORIZED" };
@@ -21,8 +19,6 @@ export const getTweets = query({
 
     // each like for an id
     const likesByTweet = {};
-
-    console.log("TWEET IDS", tweetIds)
 
     await Promise.all(tweetIds.map(async (tweetId) => {
       const likes = await ctx.db
@@ -120,8 +116,6 @@ export const getTweetsForUser = query({
   args: { userId: v.string() },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
-
-    console.log(identity)
 
     if (!identity) {
       console.warn("No identity!");

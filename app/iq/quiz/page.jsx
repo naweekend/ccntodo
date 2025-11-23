@@ -7,7 +7,6 @@ import { SpeechBubble } from "@/components/SpeechBubble";
 import { questions } from "./questions";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
 
 export default function QuizPage() {
   const searchParams = useSearchParams();
@@ -28,7 +27,6 @@ export default function QuizPage() {
 
   useEffect(() => {
     const storedIQ = localStorage.getItem("iq");
-    console.log("Stored IQ:", storedIQ);
   }, []);
 
   const handleNext = () => {
@@ -47,8 +45,6 @@ export default function QuizPage() {
     // Save total IQ
     const totalIQ = newAnswers.reduce((a, b) => a + b, 0);
     localStorage.setItem("iq", totalIQ);
-
-    console.log("Saved answer:", option.text, "Total IQ:", totalIQ);
 
     // Move to next question by updating query param
     if (q + 1 < questions.length) {

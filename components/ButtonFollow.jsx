@@ -72,7 +72,7 @@ export default function UserDetails({ userId, userImage, userName, userFullname,
             <div className="flex flex-col mt-5">
               <h1 className="text-2xl font-bold">{userFullname}</h1>
               <h2 className="opacity-80">@{userName}</h2>
-              <h3 className="bg-primary text-primary-foreground flex items-center gap-1 mt-2 w-fit px-3 py-1 rounded-md">🧠 {getIQ?.iq} IQ</h3>
+              <h3 className="bg-primary text-primary-foreground flex items-center gap-1 mt-2 w-fit px-3 py-1 rounded-md">🧠 {getIQ?.iq ?? 0} IQ</h3>
             </div>
             <div className="flex flex-col text-right">
               <p className="text-sm opacity-80">Joined {formatUTCFromMS(userCreatedAt)}</p>

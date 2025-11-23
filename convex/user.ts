@@ -26,8 +26,6 @@ export const getFollowers = query({
       .withIndex("by_userid", (q) => q.eq("userId", args.userId))
       .collect()
 
-    console.log({ followers })
-
     return followers;
   },
 })
@@ -44,8 +42,6 @@ export const getIQForUser = query({
   args: { userId: v.string() },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
-
-    console.log(identity)
 
     if (!identity) {
       console.warn("No identity!");

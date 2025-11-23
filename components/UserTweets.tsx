@@ -10,7 +10,6 @@ import Link from "next/link";
 
 export default function SectionTweets({ userId }: { userId: string }) {
   const tweets = useQuery(api.tweets.getTweetsForUser, { userId });
-  console.log(tweets);
 
   if (!tweets) return <div className="p-10 flex justify-center items-center">
     <Spinner />
@@ -18,7 +17,6 @@ export default function SectionTweets({ userId }: { userId: string }) {
 
   // Check if it's an error object
   if (!Array.isArray(tweets)) {
-    console.log("ERROR", tweets.error);
     return <div className="p-10 flex justify-center items-center">
       <Spinner />
     </div>;;

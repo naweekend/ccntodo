@@ -88,7 +88,7 @@ export default function QuizResultPage() {
 
     try {
       await createIQ({ userId, iq });
-      router.push("/home");
+      router.push(`/profile/${userId}`);
     } catch (err) {
       console.error("Failed to save IQ:", err);
     }
