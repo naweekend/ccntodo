@@ -31,7 +31,7 @@ export default function QuizResultPage() {
   useEffect(() => {
     if (iq === null) return;
 
-    const maxIq = 200;
+    const maxIq = 300;
     const percentile = (iq / maxIq) * 100;
 
     let lines: string[] = [];
