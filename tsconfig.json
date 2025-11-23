@@ -40,7 +40,8 @@
     "components/NProgressWrapper.jsx",
     "components/NProgressWrapper.jsx",
     "components/NProgressWrapper.jsx",
-    "components/NProgressWrapper.jsx"
+    "components/NProgressWrapper.jsx",
+    "components/SpeechBubble.jsx"
   ],
   "exclude": [
     "node_modules"

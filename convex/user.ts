@@ -38,3 +38,44 @@ export const removeFollower = mutation({
     await ctx.db.delete(args.followerId);
   },
 })
+
+
+export const getIQForUser = query({
+  args: { userId: v.string() },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    console.log(identity)
+
+    if (!identity) {
+      console.warn("No identity!");
+      return { error: "UNAUTHORIZED" };
+    }
+
+    const iq = await ctx.db
+      .query("iqs")
+      .withIndex("by_userid", (q) => q.eq("userId", args.userId))
+      .first()
+
+    return iq;
+  },
+})
+
+export const createIQ = mutation({
+  args: { userId: v.string(), iq: v.number() },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      console.warn("No identity!");
+      return { error: "UNAUTHORIZED" };
+    }
+
+    await ctx.db.insert("iqs", {
+      userId: args.userId,
+      iq: args.iq,
+    })
+
+    return;
+  },
+})

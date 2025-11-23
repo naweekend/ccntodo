@@ -10,6 +10,7 @@ export default defineSchema({
     userName: v.string(),
     userFullName: v.string(),
     userPicture: v.string(),
+    iq: v.number(),
   })
     .index("by_userid", ["userId"]),
   likes: defineTable({
@@ -24,6 +25,11 @@ export default defineSchema({
   followers: defineTable({
     followerId: v.string(),
     userId: v.string(),
+  })
+    .index("by_userid", ["userId"]),
+  iqs: defineTable({
+    userId: v.string(),
+    iq: v.number(),
   })
     .index("by_userid", ["userId"]),
 })

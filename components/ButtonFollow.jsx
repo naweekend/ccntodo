@@ -7,11 +7,13 @@ import { Spinner } from "./ui/spinner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import MatrixRain from "@/components/MatrixRain";
 import { formatUTCFromMS } from "@/lib/timeAgo";
+import { Brain } from "lucide-react";
 
 export default function UserDetails({ userId, userImage, userName, userFullname, userCreatedAt }) {
   const { openUserProfile } = useClerk();
   const addFollower = useMutation(api.user.addFollower);
   const removeFollower = useMutation(api.user.removeFollower);
+  const getIQ = useQuery(api.user.getIQForUser, { userId: userId });
 
   const followers = useQuery(api.user.getFollowers, { userId: userId });
   const { user: currentUser } = useUser();
@@ -71,6 +73,7 @@ export default function UserDetails({ userId, userImage, userName, userFullname,
             <div className="flex flex-col mt-5">
               <h1 className="text-2xl font-bold">{userFullname}</h1>
               <h2 className="opacity-80">@{userName}</h2>
+              <h3 className="bg-primary text-primary-foreground flex items-center gap-1 mt-2 w-fit px-3 py-1 rounded-md">🧠 {getIQ?.iq} IQ</h3>
             </div>
             <div className="flex flex-col text-right">
               <p className="text-sm opacity-80">Joined {formatUTCFromMS(userCreatedAt)}</p>

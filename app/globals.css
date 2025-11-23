@@ -232,6 +232,6 @@ html {
   /* Chrome, Safari, Opera */
 }
 
-#speech-bubble {
+.pt-mono {
   font-family: var(--font-pt-mono), monospace !important;
 }

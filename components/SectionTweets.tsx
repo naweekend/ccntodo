@@ -4,13 +4,18 @@ import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import { Spinner } from "./ui/spinner";
 import timeAgo from "@/lib/timeAgo";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import TweetControls from "./TweetControls";
 import Link from "next/link";
+import { Brain } from "lucide-react";
 
 export default function SectionTweets() {
   const tweets = useQuery(api.tweets.getTweets);
-  console.log(tweets);
 
   if (!tweets) return <div className="p-10 flex justify-center items-center">
     <Spinner />
@@ -43,9 +48,19 @@ export default function SectionTweets() {
           <div className="flex-1">
             {/* tweet info */}
             <div className="flex items-center gap-2 max-sm:justify-between">
-              <div className="flex sm:flex-row flex-col sm:gap-2">
-                <Link scroll={true} href={`/profile/${tweet.userId}`} className="font-bold max-sm:text-sm hover:underline">{tweet.userFullName}</Link>
-                <span className="opacity-70 max-sm:text-sm">@{tweet.userName}</span>
+              <div className="flex gap-2">
+                <Link scroll={true} href={`/profile/${tweet.userId}`} className="font-bold hover:underline">{tweet.userFullName}</Link>
+
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Link href="/iq" className="bg-primary text-primary-foreground flex items-center gap-1 w-fit px-2 rounded-md"><Brain size={16} /> {tweet.iq}</Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    @{tweet.userName} has 102 IQ
+                  </TooltipContent>
+                </Tooltip>
+
+                <span className="opacity-70 max-sm:hidden">@{tweet.userName}</span>
               </div>
               <span className="opacity-50">{timeAgo(tweet._creationTime)}</span>
             </div>

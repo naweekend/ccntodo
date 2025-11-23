@@ -54,10 +54,16 @@ export const createTweet = mutation({
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
 
+
     if (!identity || !identity.subject || !identity.name || !identity.nickname || !identity.pictureUrl) {
       console.warn("No identity!", identity);
       return { error: "UNAUTHORIZED" };
     }
+
+    const iq = await ctx.db
+      .query("iqs")
+      .withIndex("by_userid", (q) => q.eq("userId", identity.subject))
+      .first()
 
     if (args?.retweet) {
       await ctx.db.insert("tweets", {
@@ -67,6 +73,7 @@ export const createTweet = mutation({
         userName: identity.nickname,
         userPicture: identity.pictureUrl,
         retweet: args.retweet,
+        iq: iq?.iq || 0,
       })
 
       return;
@@ -78,6 +85,7 @@ export const createTweet = mutation({
       userFullName: identity?.name,
       userName: identity?.nickname,
       userPicture: identity?.pictureUrl,
+      iq: iq?.iq || 0,
     })
 
     return;
