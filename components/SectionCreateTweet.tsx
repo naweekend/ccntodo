@@ -36,6 +36,7 @@ export default function SectionCreateTweet() {
             toast.error("Post cannot be longer than 280 characters");
             return;
           }
+          console.log("HUH ?")
           createTweet({ text: tweetText })
           setTweetText("");
         }} type="submit">Post</Button>

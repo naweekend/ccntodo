@@ -53,10 +53,9 @@ export const createTweet = mutation({
 
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
-    console.log("IDENTITY", identity)
 
     if (!identity || !identity.subject || !identity.name || !identity.nickname || !identity.pictureUrl) {
-      console.warn("No identity!");
+      console.warn("No identity!", identity);
       return { error: "UNAUTHORIZED" };
     }
 
@@ -82,6 +81,13 @@ export const createTweet = mutation({
     })
 
     return;
+  },
+})
+
+export const deleteTweet = mutation({
+  args: { tweetId: v.id("tweets") },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.tweetId);
   },
 })
 
