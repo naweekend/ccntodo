@@ -1,4 +1,4 @@
-" flex items-center gap-1use client";
+"use client";
 import { ArrowRight } from "lucide-react";
 import { TalkingEinstein } from "./Einstein";
 import { SpeechBubble } from "./SpeechBubble";
