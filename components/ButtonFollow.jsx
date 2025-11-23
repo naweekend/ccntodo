@@ -7,7 +7,6 @@ import { Spinner } from "./ui/spinner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import MatrixRain from "@/components/MatrixRain";
 import { formatUTCFromMS } from "@/lib/timeAgo";
-import { Brain } from "lucide-react";
 
 export default function UserDetails({ userId, userImage, userName, userFullname, userCreatedAt }) {
   const { openUserProfile } = useClerk();
