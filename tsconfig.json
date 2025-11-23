@@ -41,7 +41,9 @@
     "components/NProgressWrapper.jsx",
     "components/NProgressWrapper.jsx",
     "components/NProgressWrapper.jsx",
-    "components/SpeechBubble.jsx"
+    "components/SpeechBubble.jsx",
+    "components/QuestionsForm.jsx",
+    "app/iq/quiz/page.jsx"
   ],
   "exclude": [
     "node_modules"

@@ -2,6 +2,7 @@
 import { ArrowRight } from "lucide-react";
 import { TalkingEinstein } from "./Einstein";
 import { SpeechBubble } from "./SpeechBubble";
+import Link from "next/link";
 
 export default function Quiz() {
   return (
@@ -15,7 +16,7 @@ export default function Quiz() {
           speed={40}
         />
       </div>
-      <button className="py-3 px-7 mt-5 text-lg bg-primary hover:bg-primary/90 transition-all duration-250 active:scale-95 rounded-md text-primary-foreground cursor-pointer flex items-center gap-1">Start IQ Test <ArrowRight size={16} /></button>
+      <Link href="/iq/quiz" className="py-3 px-7 mt-5 text-lg bg-primary hover:bg-primary/90 transition-all duration-250 active:scale-95 rounded-md text-primary-foreground cursor-pointer flex items-center gap-1">Start IQ Test <ArrowRight size={16} /></Link>
     </>
   )
 }
